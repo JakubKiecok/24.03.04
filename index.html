@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, html{
+            margin: 10px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="number" id="input" name="input">
+        <button onclick="Dodaj()">Dodaj</button>
+        <button onclick="Licz()">Licz</button>
+    </div>
+    <div id="bomba"></div>
+    <div id="dodaj"></div>
+    <div id="parz"></div>
+    <div id="nparz"></div>
+    <div id="pot"></div>
+    <div id="trojkot"></div>
+    <div id="trojkot2"></div>
+</body>
+<script>
+    var tablica = new Array();
+    var dodawanie = 0;
+    var parz = new Array();
+    var nparz = new Array();
+    var pot = new Array();
+    var trojkot = new Array();
+    var parzyste = new Array();
+    var nieparzyste = new Array();
+    function Dodaj(){
+        var liczeb = document.getElementById("input").value;
+        tablica.push(liczeb);
+        document.getElementById("bomba").textContent = tablica;
+        document.getElementById("input").value = "";
+        const list = document.getElementById("bomba");
+        list.innerHTML = "";
+        for (let i = 0; i < tablica.length; i++) {
+                const li = document.createElement("div");
+                li.textContent = tablica[i];
+                list.appendChild(li);
+
+            if(tablica[i] % 2 == 0 ){
+                li.style.color='Red';
+            }
+            else{
+                li.style.color='Blue';
+            }
+            }
+    }
+    function Licz(){
+        for (let i = 0; i < tablica.length; i++) {
+            dodawanie = dodawanie + parseInt(tablica[i]);
+            
+            if (parseInt(tablica[i]) %2 == 0) {
+                parz.push(tablica[i])
+            }
+            else{
+                nparz.push(tablica[i])
+            }
+            var a = Math.pow(tablica[i], 3);
+            pot.push(a)
+        }
+        document.getElementById("dodaj").textContent = dodawanie;
+        document.getElementById("parz").textContent = parz;
+        document.getElementById("nparz").textContent = nparz;
+        document.getElementById("pot").textContent = pot;
+        if (tablica.length >= 3) {
+            var liczb = tablica.length;
+            if (liczb %3 == 1) {
+                liczb = liczb - 1;
+            }
+            if (liczb %3 == 2) {
+                liczb = liczb - 2;
+            }
+            document.getElementById("trojkot").textContent = liczb / 3;
+            var a = new Array();
+            var b = new Array();
+            var c = new Array();
+            for (let i = 0; i < liczb; i++) {
+                if (i %3 == 0) {
+                    a.push(tablica[i]);
+                }
+                if (i %3 == 1) {
+                    b.push(tablica[i]);
+                }
+                if (i %3 == 2) {
+                    c.push(tablica[i]);
+                }
+                console.log(a)
+                console.log(b)
+                console.log(c)
+                for (let j = 0; j < a.length && j < b.length && j < c.length; j++) {
+                    if (a[j] + b[j] > c[j]) {
+                        // var p = "Trojkat nr " + j + " jest trojkatem";
+                        // trojkot.push(p)
+                        document.getElementById("trojkot2").textContent = "Trojkat nr " + j + " jest trojkatem";
+                    }
+                    if (a[j] + b[j] <= c[j]){
+                        // var o = "Trojkat nr " + j + " nie jest trojkatem";
+                        // trojkot.push(o)
+                        document.getElementById("trojkot2").textContent = "Trojkat nr " + j + " nie jest trojkatem";
+                    }
+                    // document.getElementById("trojkot2").textContent = trojkot;
+                }
+            }
+            
+        }
+    }
+
+</script>
+</html>
